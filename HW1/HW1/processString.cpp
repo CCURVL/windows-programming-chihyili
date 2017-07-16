@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <stdio.h>
 
 #include <gtest\gtest.h>
 
@@ -16,9 +17,25 @@ using namespace std;
 //       -1 if exception occur (ex. string containing non-digit character)
 int getAscendingStr(string& inputStr)
 {
-	
-	/// Please fill your code here
-
+	vector<string> v;
+	string token;
+	int x = 0;
+	getline(cin, inputStr);
+	istringstream delim(inputStr);
+	while (getline(delim, token, ' ')) {
+		v.push_back(token);
+		x++;
+	}
+	string temp;
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0 + i; j < 5; j++) {
+			if (v[j - 1] > v[j]) {
+				temp = v[j - 1];
+				v[j - 1] = v[j];
+				v[j] = temp;
+			}
+		}
+	}
 
 	return 0;
 }
@@ -36,8 +53,25 @@ int getAscendingStr(string& inputStr)
 //          (return vector size should be 0)
 int solveQ(vector<double> &x, double a, double b, double c)
 {
+	double d = b*b - 4 * a*c;
+	vector<double> q;
+	double ans;
+	if (d > 0) {
+		ans = (-b + sqrt(b*b - 4 * a*c)) / (2 * a);
+		q.push_back(ans);
+		ans = (-b - sqrt(b*b - 4 * a*c)) / (2 * a);
+		q.push_back(ans);
+		return 1;
+	}
+	if (d == 0) {
+		ans = -b / 2 * a;
+		q.push_back(ans);
+		return 0;
+	}
+	if (d < 0) {
+		return -1;
+	}
 
-	return 0;
 }
 
 int main(int argc, char*argv[]) {
